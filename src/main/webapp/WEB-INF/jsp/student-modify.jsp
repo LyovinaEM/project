@@ -37,43 +37,41 @@
                 <div><a href="file:///Users/ekaterinalevina/Desktop/Проект/Students%20List.html">Назад</a></div>
             </div>
             <div class="main">
-                <h2>Для создания студента введите значения и нажмите кнопку "Создать"</h2>
+                <h2>Для модификации введите значения и нажмите кнопку "Применить"</h2>
                 <div class="form_cm">
-                    <form action="/student-create" method="post">
+                    <form action="/student-modify" method="post">
                         <input type="hidden" name="id" value="${student.id}">
                         <div class="line2">
                             <div>Фамилия</div>
                             <label>
-                                <input type="text" name="surname">
+                                <input type="text" name="surname" value="${student.surname}">
                             </label>
                         </div>
                         <div class="line2">
                             <div>Имя</div>
                             <label>
-                                <input type="text" name="name">
+                                <input type="text" name="name" value="${student.name}">
                             </label>
                         </div>
                         <div class="line2">
                             <div>Группа</div>
                             <label>
-                                <input type="text" name="group">
+                                <input type="text" name="group"  value="${student.group.group}">
                             </label>
                         </div>
                         <div class="line2">
                             <div>Дата поступления</div>
                             <label>
-                                <input type="text" name="date" id="datepicker">
+                                <input type="text" name="date" id="datepicker" value="<fmt:formatDate value="${student.date}" pattern="dd/MM/yyyy"/>">
                             </label>
                         </div>
-                        <input class="button_cm_student" type="submit" value="Создать">
+                        <input class="button_cm_student" type="submit" value="Применить">
                     </form>
                 </div>
                 <c:if test="${error eq 1}">
-                <h4>Поля не должны быть пустыми!</h4>
+                    <h4>Поля не должны быть пустыми!</h4>
                 </c:if>
             </div>
         </section>
     </main>
 </div>
-</body>
-</html>

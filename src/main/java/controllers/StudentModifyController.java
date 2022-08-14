@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBManager;
+import entety.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +13,24 @@ import java.text.DateFormat;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Date;
+import java.util.Locale;
 
-
-@WebServlet(name = "StudentCreateController", urlPatterns = "/student-create")
-public class StudentCreateController extends HttpServlet {
+@WebServlet (name = "StudentModifyController", urlPatterns = "/student-modify")
+public class StudentModifyController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("WEB-INF/jsp/student-create.jsp").forward(req, resp);
+        String id = req.getParameter("idHiddenModify");
+        Student student = DBManager.getStudentById(id);
+        req.setAttribute("student", student);
+        req.getRequestDispatcher("WEB-INF/jsp/student-modify.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
         String surname = req.getParameter("surname");
         String name = req.getParameter("name");
         String group = req.getParameter("group");
@@ -41,7 +46,7 @@ public class StudentCreateController extends HttpServlet {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         Date dateFromUser = null;
         try {
-           dateFromUser = format.parse(date);
+            dateFromUser = format.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -52,7 +57,7 @@ public class StudentCreateController extends HttpServlet {
         String dateToDataBase = formatter.format(dateFromUser);
 
         int idGroup = DBManager.getGroupId(group);
-        DBManager.createStudent(surname, name, idGroup, dateToDataBase);
+        DBManager.modifyStudent(id, surname, name, idGroup, dateToDataBase);
         resp.sendRedirect("/students");
     }
 }

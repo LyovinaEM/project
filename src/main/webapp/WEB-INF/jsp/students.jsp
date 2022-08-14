@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="/resources/js/functions.js"></script>
 </head>
 <body>
 <div id="container">
@@ -37,8 +38,10 @@
                         <input class="button_student2" type="submit" value="Создать студента…">
                     </form>
 
-                    <input class="button_student1" type="submit" value="Модифицировать выбранного студента">
-                    <input class="button_student2" type="submit" value="Удалить выбранных студентов">
+                    <input class="button_student1" type="submit" value="Модифицировать выбранного студента"
+                           onclick="modifyStudents()">
+                    <input class="button_student2" type="submit" value="Удалить выбранных студентов"
+                           onclick="deleteStudents()">
                 </div>
                 <div class="students">
                     <table class="list">
@@ -50,13 +53,13 @@
                             <th class="l_col3">Группа</th>
                             <th class="l_col4">Дата поступления</th>
                         </tr>
-                        <c:forEach items="${students}" var = "s">
+                        <c:forEach items="${students}" var = "st">
                         <tr>
                             <td class="l_col0"><label><input name="idStudent" type="checkbox" value="${st.id}"></label></td>
-                            <td class="l_col1">${s.surname}</td>
-                            <td class="l_col2">${s.name}</td>
-                            <td class="l_col3">${s.group.group}</td>
-                            <td class="l_col4"><fmt:formatDate value="${s.date}" pattern="dd/MM/yyyy"/></td>
+                            <td class="l_col1">${st.surname}</td>
+                            <td class="l_col2">${st.name}</td>
+                            <td class="l_col3">${st.group.group}</td>
+                            <td class="l_col4"><fmt:formatDate value="${st.date}" pattern="dd/MM/yyyy"/></td>
                         </tr>
                         </c:forEach>
                     </table>
@@ -66,4 +69,13 @@
     </main>
 </div>
 </body>
+
+<form action="/student-delete" method="post" id="deleteForm">
+    <input type="hidden" name="idsHiddenDelete" id="idsHiddenDelete">
+</form>
+
+<form action="/student-modify" method="get" id="modifyForm">
+    <input type="hidden" name="idHiddenModify" id="idHiddenModify">
+</form>
+
 </html>
