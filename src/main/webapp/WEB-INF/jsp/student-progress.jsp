@@ -28,8 +28,8 @@
         <main>
             <section class="content">
                 <div class="side_menu">
-                    <div><a href="file:///Users/ekaterinalevina/Desktop/Проект/Title%20page.html">На главную</a></div>
-                    <div><a href="file:///Users/ekaterinalevina/Desktop/Проект/Students%20List.html">Назад</a></div>
+                    <div><a href="/">На главную</a></div>
+                    <div><a href="/students">Назад</a></div>
                 </div>
                 <div class="main">
                     <h2>Отображена успеваемость для следующего студента:</h2>
@@ -92,7 +92,7 @@
                             </div>
                             <div class="average_mark">
                                 Средняя оценка за семестр:
-                                <h3>_________балла</h3>
+                                <h3> <fmt:formatNumber value="${avg}" maxFractionDigits="2"></fmt:formatNumber> балла </h3></h3>
                             </div>
                         </div>
                     </div>

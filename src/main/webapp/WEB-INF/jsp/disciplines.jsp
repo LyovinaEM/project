@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="/resources/js/functions.js"></script>
 </head>
 <body>
 <div id="container">
@@ -26,7 +27,7 @@
     <main>
         <section class="content">
             <div class="side_menu">
-                <div><a href="file:///Users/ekaterinalevina/Desktop/Проект/Title%20page.html">На главную</a></div>
+                <div><a href="/">На главную</a></div>
             </div>
             <div class="main">
                 <h2 class="discipline_title">Список дисциплин</h2>
@@ -44,7 +45,7 @@
                                     <c:if test="${role eq 1}">
                                         <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="${d.id}"></label></td>
                                     </c:if>
-                                    <td class="ld_col1"></td>
+                                    <td class="ld_col1">${d.discipline}</td>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -60,6 +61,6 @@
             </div>
         </section>
     </main>
-
+</div>
 </body>
 </html>

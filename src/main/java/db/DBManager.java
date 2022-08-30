@@ -56,7 +56,7 @@ public class DBManager {
                 Term term = new Term();
                 term.setId(rs.getInt("id"));
                 term.setTerm(rs.getString("term"));
-
+                term.setDuration(rs.getString("duration"));
                 terms.add(term);
             }
 
@@ -79,7 +79,7 @@ public class DBManager {
                 Term term = new Term();
                 term.setId(rs.getInt("id"));
                 term.setTerm(rs.getString("term"));
-
+                term.setDuration(rs.getString("duration"));
                 return term;
             }
 
@@ -232,6 +232,108 @@ public class DBManager {
         }
 
         return marks;
+    }
+
+    public static ArrayList<Discipline> getAllActiveDisciplinesByTerm(String idTerm) {
+        ArrayList<Discipline> disciplines = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM term_discipline as td\n" +
+                    "left join discipline as d on td.id_discipline = d.id\n" +
+                    "where td.id_term = "+idTerm+" and d.status = '1'");
+
+            while (rs.next()) {
+                Discipline discipline = new Discipline();
+                discipline.setId(rs.getInt("id_discipline"));
+                discipline.setDiscipline(rs.getString("discipline"));
+                disciplines.add(discipline);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return disciplines;
+    }
+
+    public static ArrayList<Discipline> getAllActiveDisciplines() {
+        ArrayList<Discipline> disciplines = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM discipline where status = '1'");
+
+            while (rs.next()) {
+                Discipline discipline = new Discipline();
+                discipline.setId(rs.getInt("id"));
+                discipline.setDiscipline(rs.getString("discipline"));
+                disciplines.add(discipline);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return disciplines;
+    }
+
+    public static void deleteTerm(String id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute("UPDATE `student` SET `term` = '0' WHERE (`id` = '" + id + "');");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getLastNumTerm() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM term where status = '1' ORDER BY ID DESC LIMIT 1 ");
+
+            while (rs.next()) {
+                String name = rs.getString("term");
+                name = name.replace("Семестр ", "");
+                return Integer.parseInt(name);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    public static void createTerm(String name, String duration, String[] disciplines) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute("INSERT INTO `term` (`term`, `duration`) VALUES ('"+name+"', '"+duration+"');");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM term ORDER BY ID DESC LIMIT 1");
+            int idTerm = -1;
+            while (rs.next()){
+                idTerm = rs.getInt("id");
+            }
+            for(String idDisc:disciplines){
+                stmt.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('"+idTerm+"','"+idDisc+"');");
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

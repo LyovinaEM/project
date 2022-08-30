@@ -27,7 +27,7 @@
     <main>
         <section class="content">
             <div class="side_menu">
-                <div><a href="file:///Users/ekaterinalevina/Desktop/Проект/Title%20page.html">На главную</a></div>
+                <div><a href="/">На главную</a></div>
             </div>
             <div class="main">
                 <div class="button_group1">

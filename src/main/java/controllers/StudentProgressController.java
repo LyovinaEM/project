@@ -34,6 +34,19 @@ public class StudentProgressController extends HttpServlet {
         Term selectedTerm = DBManager.getTermById(idTerm);
         ArrayList<Mark> marks = DBManager.getMarks(idStud, idTerm);
 
+        double summaMarks = 0;
+        for(Mark m : marks) {
+            if (m.getMark() != -1) {
+                summaMarks = summaMarks + m.getMark();
+            }
+        }
+
+        if(marks.size() > 0 && summaMarks !=0){
+            req.setAttribute("avg", (summaMarks / marks.size()));
+        } else {
+            req.setAttribute("avg", "0.0");
+        }
+
         req.setAttribute("student", student);
         req.setAttribute("terms", terms);
         req.setAttribute("selectedTerm", selectedTerm);

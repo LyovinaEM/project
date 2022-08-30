@@ -23,9 +23,10 @@
     <main>
         <section class="menu_title">
             <a href="/students">Студенты</a>
-            <a href="/discipline">Дисциплины</a>
-            <a href="/term">Семестры</a>
+            <a href="/disciplines">Дисциплины</a>
+            <a href="/terms">Семестры</a>
         </section>
     </main>
+</div>
 </body>
 </html>
