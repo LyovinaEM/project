@@ -3,10 +3,7 @@ package db;
 import constans.Constans;
 import entety.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DBManager {
@@ -43,6 +40,7 @@ public class DBManager {
 
         return students;
     }
+
     public static ArrayList<Term> getAllActiveTerms() {
         ArrayList<Term> terms = new ArrayList<>();
 
@@ -73,7 +71,7 @@ public class DBManager {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM term where status = 1 AND id="+idTerm);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM term where status = 1 AND id=" + idTerm);
 
             while (rs.next()) {
                 Term term = new Term();
@@ -127,6 +125,32 @@ public class DBManager {
         }
     }
 
+    public static void createDiscipline(String discipline) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute("INSERT INTO `discipline` (`discipline`) VALUES ('" + discipline + "');");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteDiscipline(String id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute("UPDATE `discipline` SET `status` = '0' WHERE (`id` = '" + id + "');");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void deleteStudent(String id) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -172,20 +196,54 @@ public class DBManager {
         return null;
     }
 
+    public static Discipline getDisciplineById(String id) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT d.id, d.discipline FROM discipline as d where status = '1' AND d.id =" + id);
+
+            while (rs.next()) {
+                Discipline discipline = new Discipline();
+                discipline.setId(rs.getInt("id"));
+                discipline.setDiscipline(rs.getString("discipline"));
+                discipline.setStatus(1);
+                return discipline;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void modifyStudent(String id, String surname, String name, int idGroup, String date) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
             Statement stmt = conn.createStatement();
-            stmt.execute("UPDATE `student` SET `surname` = '"+surname+"', `name` = '"+name+"', `id_group` = '"+idGroup+"', `date` = '"+date+"' WHERE (`id` = '"+id+"');\n");
+            stmt.execute("UPDATE `student` SET `surname` = '" + surname + "', `name` = '" + name + "', `id_group` = '" + idGroup + "', `date` = '" + date + "' WHERE (`id` = '" + id + "');\n");
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+        public static void modifyDiscipline(String id, String discipline){
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+                Statement stmt = conn.createStatement();
+                stmt.execute("UPDATE `discipline` SET `discipline` = '" +discipline+ "' WHERE (`id` = '"+id+"');");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
     public static ArrayList<Mark> getMarks(String idStud, String idTerm) {
 
@@ -272,6 +330,7 @@ public class DBManager {
                 Discipline discipline = new Discipline();
                 discipline.setId(rs.getInt("id"));
                 discipline.setDiscipline(rs.getString("discipline"));
+
                 disciplines.add(discipline);
             }
 
@@ -287,7 +346,7 @@ public class DBManager {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
             Statement stmt = conn.createStatement();
-            stmt.execute("UPDATE `student` SET `term` = '0' WHERE (`id` = '" + id + "');");
+            stmt.execute("UPDATE `term` SET `status` = '0' WHERE (`id` = '"+id+"');");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -335,5 +394,37 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+
+    public static void modifyTerm(String id, String duration, String[] disciplines) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute("UPDATE `term` SET `duration` = '"+duration+"' WHERE (`id` = '"+id+"');");
+            stmt.execute("DELETE FROM `term_discipline` WHERE (`id_term` = '"+id+"');");
+            for(String idDisc:disciplines){
+                stmt.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('"+id+"','"+idDisc+"');");
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void modifyTerm(String id, String duration) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute("UPDATE `term` SET `duration` = '"+duration+"' WHERE (`id` = '"+id+"');");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 

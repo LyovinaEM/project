@@ -31,13 +31,14 @@
                 <div><a href="/terms">Назад</a></div>
             </div>
             <div class="main">
-                <h2>Для создания семестра заполните следующие данные и нажмите кнопку "Создать".</h2>
+                <h2>Для модификации семестра отредактируйте данные и нажмите кнопку "Применить".</h2>
                 <div class="form_cm">
-                    <form action="term-create" method="post">
+                    <form action="/term-modify" method="post">
+                       <input type="hidden" name="idTerm" value="${term.id}">
                         <div class="line5">
                             <div>Длительность (в неделях)</div>
                             <label>
-                                <input name="duration" type="text" value="24 недели">
+                                <input name="duration" type="text" value="${term.duration}">
                             </label>
                         </div>
                         <div class="line5">
@@ -50,7 +51,7 @@
                                 </select>
                             </label>
                         </div>
-                        <input class="button_cm_term" type="submit" value="Создать">
+                        <input class="button_cm_term" type="submit" value="Применить">
                     </form>
                 </div>
                 <c:if test="${error eq 1}">

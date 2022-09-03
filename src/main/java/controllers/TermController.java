@@ -19,6 +19,7 @@ public class TermController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String idTerm = req.getParameter("idTerm");
+
         ArrayList<Term> terms = DBManager.getAllActiveTerms();
 
         if (idTerm == null || idTerm.equals("")) {

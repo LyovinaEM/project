@@ -39,7 +39,7 @@
                                     <select name="idTerm">
                                         <c:forEach items="${terms}" var="t">
                                             <c:choose>
-                                                <c:when test="${t.id== selectedTerm.id}">
+                                                <c:when test="${t.id == selectedTerm.id}">
                                                     <option selected value="${t.id}">${t.term}</option>
                                                     <br />
                                                 </c:when>
@@ -77,7 +77,7 @@
                                     <form action="/term-create" method="get">
                                         <input class="button_terms" type="submit" value="Создать семестр…">
                                     </form>
-                                    <form action="/term_modifying" method="get">
+                                    <form action="/term-modify" method="get">
                                         <input type="hidden" name="idTermToModify" value="${selectedTerm.id}">
                                         <input class="button_terms" type="submit" value="Модифицировать текущий семестр…">
                                     </form>

@@ -38,7 +38,9 @@ public class StudentModifyController extends HttpServlet {
 
         if (surname.equals("") || name.equals("")|| group.equals("")|| date.equals("")){
             req.setAttribute("error", "1");
-            req.getRequestDispatcher("WEB-INF/jsp/student-create.jsp").forward(req, resp);
+            Student student = DBManager.getStudentById(id);
+            req.setAttribute("student", student);
+            req.getRequestDispatcher("WEB-INF/jsp/student-modify.jsp").forward(req, resp);
             return;
         }
 
@@ -57,7 +59,7 @@ public class StudentModifyController extends HttpServlet {
         String dateToDataBase = formatter.format(dateFromUser);
 
         int idGroup = DBManager.getGroupId(group);
-        DBManager.modifyStudent(id, surname, name, idGroup, dateToDataBase);
+        DBManager.modifyStudent(id, surname, name, idGroup, date);
         resp.sendRedirect("/students");
     }
 }
