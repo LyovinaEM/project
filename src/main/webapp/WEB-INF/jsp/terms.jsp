@@ -20,7 +20,15 @@
         <nav class="head">
             <h1 class="title">Система управления студентами и их успеваемостью</h1>
             <div class="login">
-                <div><a href="/login">Login</a></div>
+                <c:choose>
+                    <c:when test="${isLogin eq true}">
+                        <div><p>Привет, ${login}!</p></div>
+                        <div><a href="/logout">Logout</a></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div><a href="/login">Login</a></div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>
@@ -74,6 +82,7 @@
                         </div>
                         <div class="root_terms">
                             <div class="button_group3">
+                                <c:if test="${role eq 1}">
                                     <form action="/term-create" method="get">
                                         <input class="button_terms" type="submit" value="Создать семестр…">
                                     </form>
@@ -85,6 +94,7 @@
                                         <input type="hidden" name="idTermToDelete" value="${selectedTerm.id}">
                                         <input class="button_terms" type="submit" value="Удалить текущий семестр…">
                                     </form>
+                                </c:if>
                             </div>
                         </div>
                     </div>

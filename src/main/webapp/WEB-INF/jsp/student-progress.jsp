@@ -20,7 +20,15 @@
                 <h1 class="title">Система управления студентами и их успеваемостью</h1>
                 <div class="login">
                     <div class="login">
-                        <div><a href="/login">Login</a></div>
+                        <c:choose>
+                            <c:when test="${isLogin eq true}">
+                                <div><p>Привет, ${login}!</p></div>
+                                <div><a href="/logout">Logout</a></div>
+                            </c:when>
+                            <c:otherwise>
+                                <div><a href="/login">Login</a></div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </nav>

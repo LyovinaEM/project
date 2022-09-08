@@ -1,5 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +18,16 @@
         <nav class="head">
             <h1 class="title">Система управления студентами и их успеваемостью</h1>
             <div class="login">
-                <div><a href="/logout">Logout</a></div>
+
+                <c:choose>
+                    <c:when test="${isLogin eq true}">
+                        <div><p>Привет, ${login}!</p></div>
+                        <div><a href="/logout">Logout</a></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div><a href="/login">Login</a></div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>

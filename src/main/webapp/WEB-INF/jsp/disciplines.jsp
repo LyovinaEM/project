@@ -20,7 +20,15 @@
         <nav class="head">
             <h1 class="title">Система управления студентами и их успеваемостью</h1>
             <div class="login">
-                <div><a href="/login">Login</a></div>
+                <c:choose>
+                    <c:when test="${isLogin eq true}">
+                        <div><p>Привет, ${login}!</p></div>
+                        <div><a href="/logout">Logout</a></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div><a href="/login">Login</a></div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>
@@ -35,12 +43,16 @@
                     <div class="discipline">
                         <table class="list">
                             <tr>
+                                <c:if test="${role eq 1}">
                                 <th class="ld_col0"></th>
+                                </c:if>
                                 <th class="ld_col1">Наименование дисциплины</th>
                             </tr>
                             <c:forEach items="${disciplines}" var="d">
                                 <tr>
+                                    <c:if test="${role eq 1}">
                                     <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="${d.id}"></label></td>
+                                    </c:if>
                                     <td class="ld_col1">${d.discipline}</td>
                                 </tr>
                             </c:forEach>
@@ -48,6 +60,7 @@
                     </div>
                     <div class="root_discipline">
                         <div class="button_group2">
+                            <c:if test="${role eq 1}">
                             <form action="/discipline-create" method="get">
                                 <input class="button_discipline" type="submit" value="Создать дисциплину">
                             </form>
@@ -55,7 +68,7 @@
                                    onclick="modifyDisciplines()">
                             <input class="button_discipline" type="submit" value="Удалить выбранную дисциплину"
                                    onclick="deleteDisciplines()">
-
+                            </c:if>
                         </div>
                     </div>
                 </div>

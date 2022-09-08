@@ -341,6 +341,52 @@ public class DBManager {
         return disciplines;
     }
 
+
+    public static ArrayList<Role> getAllRoles() {
+        ArrayList<Role> roles = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM role");
+
+            while (rs.next()) {
+                Role role = new Role();
+                role.setId(rs.getInt("id"));
+                role.setRole(rs.getString("role"));
+
+                roles.add(role);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return roles;
+    }
+
+    public static boolean canLogin(String login, String password, String role) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user_role as ur\n" +
+                    "left join user as u on ur.id_user = u.id\n" +
+                    "where ur.id_role = '"+role+"' and u.login = '"+login+"' and u.password = '"+password+"'");
+
+            while (rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public static void deleteTerm(String id) {
         try {
             Class.forName("com.mysql.jdbc.Driver");

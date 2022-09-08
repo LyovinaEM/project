@@ -20,7 +20,15 @@
         <nav class="head">
             <h1 class="title">Система управления студентами и их успеваемостью</h1>
             <div class="login">
-                <div><a href="/login">Login</a></div>
+                <c:choose>
+                    <c:when test="${isLogin eq true}">
+                        <div><p>Привет, ${login}!</p></div>
+                        <div><a href="/logout">Logout</a></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div><a href="/login">Login</a></div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>
@@ -32,8 +40,9 @@
             <div class="main">
                 <div class="button_group1">
                     <input class="button_student1" type="submit"
-                           value="Просмотреть успеваемость выбранных студентов" onclick="progressStudent()">
+                           value="Посмотреть успеваемость студента" onclick="progressStudent()">
 
+                    <c:if test="${role eq 1}">
                     <form action="/student-create" method="get">
                         <input class="button_student2" type="submit" value="Создать студента…">
                     </form>
@@ -42,6 +51,7 @@
                            onclick="modifyStudents()">
                     <input class="button_student2" type="submit" value="Удалить выбранных студентов"
                            onclick="deleteStudents()">
+                    </c:if>
                 </div>
                 <div class="students">
                     <table class="list">

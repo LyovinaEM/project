@@ -9,24 +9,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b091417-e66e-45b1-b43c-f9182562a562" name="Changes" comment="Добавлена функция - удалить и создать семестр">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/DisciplineCreateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/DisciplineDeleteController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/DisciplineModifyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/TermModifyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/discipline-create.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/discipline-modify.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/term-modify.jsp" afterDir="false" />
+    <list default="true" id="4b091417-e66e-45b1-b43c-f9182562a562" name="Changes" comment="Добавлены функции - удалить,создать и модифицировать дисциплины">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/LogoutController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/filtres/LoginFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/StudentModifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/StudentModifyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/TermController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/TermController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/TermCreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/TermCreateController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/DBManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entety/Discipline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entety/Discipline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/discipline-create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/discipline-create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/discipline-modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/discipline-modify.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/disciplines.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/disciplines.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/student-create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/student-create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/student-modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/student-modify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/student-progress.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/student-progress.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/students.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/students.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/term-create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/term-create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/term-modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/term-modify.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/terms.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/terms.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +233,8 @@
       <workItem from="1661854987492" duration="2774000" />
       <workItem from="1661857802157" duration="107000" />
       <workItem from="1661918770711" duration="6788000" />
-      <workItem from="1662094415397" duration="19238000" />
+      <workItem from="1662094415397" duration="19507000" />
+      <workItem from="1662619252445" duration="6587000" />
     </task>
     <task id="LOCAL-00001" summary="Добавлен код">
       <created>1659885392122</created>
@@ -269,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661844766184</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавлены функции - удалить,создать и модифицировать дисциплины">
+      <created>1662190535223</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1662190535225</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,6 +301,7 @@
     <MESSAGE value="Добавлена функция - модифицировать студента" />
     <MESSAGE value="Добавлена функция - посмотреть успеваемость студента" />
     <MESSAGE value="Добавлена функция - удалить и создать семестр" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена функция - удалить и создать семестр" />
+    <MESSAGE value="Добавлены функции - удалить,создать и модифицировать дисциплины" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены функции - удалить,создать и модифицировать дисциплины" />
   </component>
 </project>
