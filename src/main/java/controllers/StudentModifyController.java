@@ -58,8 +58,9 @@ public class StudentModifyController extends HttpServlet {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateToDataBase = formatter.format(dateFromUser);
 
+
         int idGroup = DBManager.getGroupId(group);
-        DBManager.modifyStudent(id, surname, name, idGroup, date);
+        DBManager.modifyStudent(id, surname, name, idGroup, dateToDataBase);
         resp.sendRedirect("/students");
     }
 }

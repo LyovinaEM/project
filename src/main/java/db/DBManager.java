@@ -223,7 +223,7 @@ public class DBManager {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(Constans.CONNECTIONAL_URL);
             Statement stmt = conn.createStatement();
-            stmt.execute("UPDATE `student` SET `surname` = '" + surname + "', `name` = '" + name + "', `id_group` = '" + idGroup + "', `date` = '" + date + "' WHERE (`id` = '" + id + "');\n");
+            stmt.execute("UPDATE `student` SET `surname` = '"+surname+"', `name` = '"+name+"', `id_group` = '"+idGroup+"', `date` = '"+date+"' WHERE (`id` = '"+id+"');\n");
 
 
         } catch (Exception e) {
